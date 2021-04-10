@@ -1,6 +1,5 @@
 package br.com.abr04.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,14 +15,13 @@ import br.com.abr04.dto.TokenDto;
 import br.com.abr04.form.LoginForm;
 import br.com.abr04.security.TokenService;
 
-
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
 	@Autowired
 	private AuthenticationManager authManager;
-	
+
 	@Autowired
 	private TokenService tokenService;
 
@@ -34,11 +32,10 @@ public class AuthenticationController {
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
-			
-			//System.out.println(token);
+			// System.out.println(token);
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (AuthenticationException e) {
-		   return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().build();
 		}
 	}
 
