@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.abr04.dto.TokenDto;
 import br.com.abr04.form.LoginForm;
+import br.com.abr04.security.TokenService;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -20,14 +23,20 @@ public class AuthenticationController {
 
 	@Autowired
 	private AuthenticationManager authManager;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@PostMapping
 	@RequestMapping
-	public ResponseEntity<?> authenticationLogin(@RequestBody LoginForm form) {
+	public ResponseEntity<TokenDto> authenticationLogin(@RequestBody LoginForm form) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
-			return ResponseEntity.ok().build();
+			String token = tokenService.gerarToken(authentication);
+			
+			//System.out.println(token);
+			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (AuthenticationException e) {
 		   return ResponseEntity.badRequest().build();
 		}

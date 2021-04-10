@@ -4,11 +4,13 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import br.com.abr04.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Service
 public class TokenService {
 	
 	@Value("${forum.jwt.expiration}")
@@ -20,7 +22,7 @@ public class TokenService {
 	public String gerarToken(Authentication authentication) {
 		User logado = (User) authentication.getPrincipal();
 		Date hoje =  new Date();
-		Date dataExpiration = new Date(hoje.getTime() + expiration);
+		Date dataExpiration = new Date(hoje.getTime() + Long.parseLong(expiration));
 		return Jwts.builder()
 				.setIssuer("API Security")
 		        .setSubject(logado.getId().toString())
