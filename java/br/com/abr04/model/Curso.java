@@ -9,11 +9,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CURSOS")
 public class Curso {
-	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nome;
+	private String categoria;
 
 	public Long getId() {
 		return id;
@@ -30,7 +32,13 @@ public class Curso {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
 }
