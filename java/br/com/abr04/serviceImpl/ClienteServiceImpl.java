@@ -18,4 +18,10 @@ public class ClienteServiceImpl implements ClienteService {
 		Cliente clienteCadastrado = clienteRepository.save(cliente);
 		return new ClienteDto(clienteCadastrado);
 	}
+
+	@Override
+	public ClienteDto retornarPorNome(String nome) {
+		Cliente retornarPorNome = clienteRepository.findByNome(nome);
+		return new ClienteDto(retornarPorNome);
+	}
 }

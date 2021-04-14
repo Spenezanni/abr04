@@ -8,4 +8,6 @@ public interface ClienteService {
 
 	ClienteDto cadastrarClienteDto(Cliente cliente);
 
+	ClienteDto retornarPorNome(String nome);
+
 }

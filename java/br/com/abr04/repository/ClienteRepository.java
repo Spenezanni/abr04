@@ -8,4 +8,7 @@ import br.com.abr04.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
+	Cliente findByNome(String nome);
+
+
 }

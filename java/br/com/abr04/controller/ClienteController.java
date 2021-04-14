@@ -1,8 +1,12 @@
 package br.com.abr04.controller;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +30,13 @@ public class ClienteController {
 		ClienteDto clienteDto = clienteService.cadastrarClienteDto(cliente);
 		return ResponseEntity.ok().body(clienteDto);
 	}
+	
+	@GetMapping
+	public ResponseEntity<ClienteDto> retornarPorNome(String nome){
+		ClienteDto clienteDto = clienteService.retornarPorNome(nome);
+		return ResponseEntity.ok().body(clienteDto);
+	}
+	
 
 	
 }
